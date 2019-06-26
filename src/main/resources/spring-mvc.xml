@@ -14,14 +14,31 @@
         http://www.springframework.org/schema/aop
         https://www.springframework.org/schema/aop/spring-aop.xsd">
 
+
+    <context:component-scan base-package="com.cskaoyan.controller">
+        <!--只扫描含有@Controller的-->
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+
+    <mvc:annotation-driven />
+
+    <!-- 视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+
+    <!--视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+
     <!-- 注解驱动 -->
-    <mvc:annotation-driven  conversion-service="conversionService" validator="validator"/>
+<!--    <mvc:annotation-driven  conversion-service="conversionService" validator="validator"/>-->
 
     <!-- 开启aop，对类代理 -->
-    <aop:config proxy-target-class="true"/>
-
-    <!-- 使用spring组件扫描 -->
-    <context:component-scan base-package="com.zck.erp.controller" />
+<!--    <aop:config proxy-target-class="true"/>-->
 
     <!--解决返回json数据乱码问题-->
     <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -38,20 +55,13 @@
             <ref bean="stringHttpMessageConverter" />
         </mvc:message-converters>
     </mvc:annotation-driven>
+    <!--    -->
 
     <!--静态资源-->
     <mvc:resources mapping="/image/**" location="/WEB-INF/image/" />
     <mvc:resources mapping="/js/**" location="/WEB-INF/js/" />
     <mvc:resources mapping="/css/**" location="/WEB-INF/css/" />
 
-    <!-- 视图解析器 -->
-    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
-
-    <!--内部视图解析器-->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/" />
-        <property name="suffix" value=".jsp" />
-    </bean>
 
     <!-- 定义文件上传解析器 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -61,7 +71,7 @@
         <property name="maxUploadSize" value="20971520"/>
     </bean>
 
-<!--    &lt;!&ndash; 定义统一异常处理器 &ndash;&gt;-->
+    <!-- 定义统一异常处理器 -->
 <!--    <bean class="com.zck.erp.exception.CustomExceptionResolver"/>-->
 
 <!--    &lt;!&ndash; 转换器 &ndash;&gt;-->
