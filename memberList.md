@@ -5,5 +5,4 @@
 - 董浩(@luofeng1106)
 - 胡建暄(@icehero12138)
 - 司凌宇(@sicypress)
-- 袁中璞(@ZhongpuYuan)
 
