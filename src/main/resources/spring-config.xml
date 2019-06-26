@@ -33,7 +33,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="datasource"/>
         <!--给POJO起别名-->
-        <property name="typeAliasesPackage" value="com.cskaoyan.pojo"/>
+        <property name="configLocation" value="classpath:mybatis.xml"/>
     </bean>
 
 
